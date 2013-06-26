@@ -20,6 +20,14 @@ solution "MSaveFile"
     if os.is("windows") then
         defines { "WIN32" }
     end
+
+    configuration "Debug"
+        defines { "DEBUG" }
+        flags { "Symbols" }
+
+    configuration "Release"
+        defines { "NDEBUG" }
+        flags { "Optimize" }  
         
     project "MSaveFile"
         kind "SharedLib"
@@ -46,12 +54,20 @@ solution "MSaveFile"
         }
         -- link to Maratis
         links { "MCore", "MEngine" }
-    
-        configuration "Debug"
-            defines { "DEBUG" }
-            flags { "Symbols" }
- 
-        configuration "Release"
-            defines { "NDEBUG" }
-            flags { "Optimize" }  
+        
+    project "test"
+        kind "ConsoleApp"
+        language "C++"
 
+        files {
+            "src/MSaveFileImpl.cpp",
+            "include/**.h",
+            "**.md",
+            "tinyxml/**",
+            "test/**",
+            os.getenv("MSDKDIR") .. "SDK/**.h"
+        }
+        includedirs { "include", "test/testsuite" }
+        targetdir "bin"
+
+        postbuildcommands { "bin/test" }
