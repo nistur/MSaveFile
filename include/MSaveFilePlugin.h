@@ -12,11 +12,29 @@
 # define EXPORT
 #endif
 
+#ifdef  M_SAVE_FILE_STATIC
+
+#define MPluginStart(x) \
+x##Start()
+
+#define MPluginEnd(x)  \
+x##End()
+
+#else/*!M_SCRIPT_EXT_STATIC*/
+
+#define MPluginStart(x) \
+StartPlugin()
+
+#define MPluginEnd(x)  \
+EndPlugin()
+
+#endif/*M_SCRIPT_EXT_STATIC*/
+
 extern "C"
 {
 
-EXPORT void StartPlugin();
-EXPORT void EndPlugin();
+EXPORT void MPluginStart(MSaveFile);
+EXPORT void MPluginEnd  (MSaveFile);
 
 }
 #endif/*__M_SAVE_FILE_PLUGIN_H__*/
