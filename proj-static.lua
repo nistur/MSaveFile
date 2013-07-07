@@ -22,7 +22,7 @@
             ["Plugin/*"] = { "**.h", "**.cpp" },
             ["Doc/*"] = { "**.md" }
         }
-        defines { "M_USE_SCRIPT_EXT", "M_USE_GAME_EVENT", "M_SAVE_FILE_STATIC" }
+        defines { "M_SAVE_FILE_STATIC" }
 
         -- link to Maratis
         links { "MCore", "MEngine" }
