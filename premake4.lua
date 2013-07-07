@@ -1,8 +1,13 @@
 dofile("bin2c.lua")
+dofile("os.lua")
 
-local file = io.open("scripts/MSaveFileLua.c", "w")
-file:write(bin2c({"scripts/MSaveFile.lua"}))
-file:close()
+local _EMBED_DIR = _WORKING_DIR .. "/scripts/"
+-- embed all lua files in the embed dir
+for i, filename in os.dir(_EMBED_DIR, "%.lua$") do
+    local file = io.open(_EMBED_DIR .. filename:gsub("%.lua$", "Lua%.c"), "w")
+    file:write(bin2c({path.getrelative(_WORKING_DIR, _EMBED_DIR .. filename)}))
+    file:close()
+end
 
 -- Particle system project
 solution "MSaveFile"
@@ -15,7 +20,7 @@ solution "MSaveFile"
           "." }
     includedirs { os.getenv("MSDKDIR") .. "/SDK/MCore/Includes",
               os.getenv("MSDKDIR") .. "/SDK/MEngine/Includes",
-            os.getenv("HOME") .. "/dev/MEvent/include",
+            os.getenv("HOME") .. "/dev/MEvent/include", -- need to put plugins in a sensible place
             "tinyxml"}
 
     defines { "M_SAVE_FILE_BUILD" }
