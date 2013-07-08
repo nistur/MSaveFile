@@ -11,8 +11,9 @@
             "tinyxml/**",
             os.getenv("MSDKDIR") .. "SDK/**.h"
         }
-        includedirs { "include", "scripts" }
+        includedirs { "include", "scripts", "tinyxml" }
         targetdir "bin"
+        targetname "MSaveFile"
 
         -- split the files up a bit nicer inside Visual Studio
         vpaths { 
