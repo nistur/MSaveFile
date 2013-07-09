@@ -24,11 +24,11 @@ solution "MSaveFile"
             "tinyxml"}
 
     -- use MGameEvent if it exists
-    if os.isfile(os.getenv("MSDKDIR") .. "Plugins/Includes/MGameEvent.h") then
+    if os.isfile(os.getenv("MSDKDIR") .. "/Plugins/Includes/MGameEvent.h") then
         defines { "M_USE_GAME_EVENT" }
     end
 
-    if os.isfile(os.getenv("MSDKDIR") .. "Plugins/Includes/MScriptExt.h") then
+    if os.isfile(os.getenv("MSDKDIR") .. "/Plugins/Includes/MScriptExt.h") then
         defines { "M_USE_SCRIPT_EXT" }
     end
 

@@ -10,6 +10,7 @@
 class MSaveFileEventListener : public MEventListener
 {
 public:
+    MEventListenerDeclare(MSaveFileEventListener);
     void onEvent(const char* event)
     {
         if(strcmp(event, "MScriptInit") == 0)
@@ -19,6 +20,8 @@ public:
         }
     }
 };
+
+MSaveFileEventListener s_saveFileScriptEventListener;
 #endif/*M_USE_GAME_EVENT*/
 
 void MPluginStart(MSaveFile)
